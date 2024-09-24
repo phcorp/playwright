@@ -93,6 +93,7 @@ const config: Config<PlaywrightWorkerOptions & PlaywrightTestOptions & TestModeW
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 3 : 0,
   reporter: reporters(),
+  ide: 'phpstorm',
   projects: [],
   use: {
     connectOptions,
