@@ -186,6 +186,7 @@ function itemLocation(item: TreeItem | undefined, model: TeleSuiteUpdaterTestMod
     file: item.location.file,
     line: item.location.line,
     column: item.location.column,
+    ide: model.config.ide,
     source: {
       errors: model.loadErrors.filter(e => e.location?.file === item.location.file).map(e => ({ line: e.location!.line, message: e.message! })),
       content: undefined,

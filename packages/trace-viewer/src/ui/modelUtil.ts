@@ -31,6 +31,7 @@ export type SourceLocation = {
   file: string;
   line: number;
   column: number;
+  ide?: string;
   source?: SourceModel;
 };
 

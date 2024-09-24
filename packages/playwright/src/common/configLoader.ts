@@ -173,6 +173,11 @@ function validateConfig(file: string, config: Config) {
     }
   }
 
+  if ('ide' in config && config.ide !== undefined) {
+    if (typeof config.ide !== 'string' || !['atom', 'emacs', 'intellij', 'macvim', 'neovim', 'phpstorm', 'pycharm', 'sublime', 'textmate', 'vim', 'vscode', 'vscodium', 'webstorm'].includes(config.ide))
+      throw errorWithFile(file, `config.ide must be one of "atom", "emacs", "intellij", "macvim", "neovim", "phpstorm", "pycharm", "sublime", "textmate", "vim", "vscode", "vscodium" or "webstorm"`);
+  }
+
   if ('maxFailures' in config && config.maxFailures !== undefined) {
     if (typeof config.maxFailures !== 'number' || config.maxFailures < 0)
       throw errorWithFile(file, `config.maxFailures must be a non-negative number`);

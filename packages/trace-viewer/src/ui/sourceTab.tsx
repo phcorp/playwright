@@ -92,7 +92,39 @@ export const SourceTab: React.FunctionComponent<{
       onOpenExternally(location);
     } else {
       // This should open an external protocol handler instead of actually navigating away.
-      window.location.href = `vscode://file//${location.file}:${location.line}`;
+      switch (location.ide) {
+        case 'atom':
+          window.location.href = `atm://open?url=file://${location.file}&line=${location.line}&column=${location.column}`;
+          break;
+        case 'emacs':
+          window.location.href = `emacs://open/?url=file://${location.file}&line=${location.line}&column=${location.column}`;
+          break;
+        case 'intellij':
+        case 'phpstorm':
+        case 'pycharm':
+        case 'webstorm':
+          window.location.href = `${location.ide}://open?file=${location.file}&line=${location.line}`;
+          break;
+        case 'macvim':
+        case 'neovim':
+        case 'vim':
+          window.location.href = `vim://${location.file}?line=${location.line}&column=${location.column}`;
+          break;
+        case 'sublime':
+          window.location.href = `subl://open?url=file://${location.file}&line=${location.line}&column=${location.column}`;
+          break;
+        // See https://macromates.com/manual/en/using_textmate_from_terminal#url_scheme_html
+        case 'textmate':
+          window.location.href = `txmt://open/?url=file://${location.file}&line=${location.line}&column=${location.column}`;
+          break;
+        case 'vscode':
+        case 'vscodium':
+        case null:
+          window.location.href = `vscode://file//${location.file}:${location.line}`;
+          break;
+        default:
+          window.location.href = `${location.ide}://open?url=file://${location.file}&line=${location.line}&column=${location.column}`;
+      }
     }
   }, [onOpenExternally, location]);
 
@@ -109,7 +141,7 @@ export const SourceTab: React.FunctionComponent<{
           <div>{shortFileName}</div>
         </div>
         <CopyToClipboard description='Copy filename' value={shortFileName}/>
-        {location && <ToolbarButton icon='link-external' title='Open in VS Code' onClick={openExternally}></ToolbarButton>}
+        {location && <ToolbarButton icon='link-external' title='Open in IDE' onClick={openExternally}></ToolbarButton>}
       </Toolbar> }
       <CodeMirrorWrapper text={source.content || ''} language='javascript' highlight={highlight} revealLine={targetLine} readOnly={true} lineNumbers={true} />
     </div>}

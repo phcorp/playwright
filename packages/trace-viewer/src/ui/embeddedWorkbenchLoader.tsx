@@ -27,8 +27,8 @@ function openPage(url: string, target?: string) {
     window.parent!.postMessage({ method: 'openExternal', params: { url, target } }, '*');
 }
 
-function openSourceLocation({ file, line, column }: SourceLocation) {
-  window.parent!.postMessage({ method: 'openSourceLocation', params: { file, line, column } }, '*');
+function openSourceLocation({ file, line, column, ide }: SourceLocation) {
+  window.parent!.postMessage({ method: 'openSourceLocation', params: { file, line, column, ide } }, '*');
 }
 
 export const EmbeddedWorkbenchLoader: React.FunctionComponent = () => {

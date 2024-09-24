@@ -173,6 +173,7 @@ export const Workbench: React.FunctionComponent<{
       file: '',
       line: 0,
       column: 0,
+      ide: 'vscode',
       source: {
         errors: [],
         content: source.text

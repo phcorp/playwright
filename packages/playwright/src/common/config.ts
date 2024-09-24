@@ -80,6 +80,7 @@ export class FullConfigInternal {
       globalTimeout: takeFirst(configCLIOverrides.globalTimeout, userConfig.globalTimeout, 0),
       grep: takeFirst(userConfig.grep, defaultGrep),
       grepInvert: takeFirst(userConfig.grepInvert, null),
+      ide: takeFirst(userConfig.ide, 'vscode'),
       maxFailures: takeFirst(configCLIOverrides.debug ? 1 : undefined, configCLIOverrides.maxFailures, userConfig.maxFailures, 0),
       metadata: takeFirst(userConfig.metadata, {}),
       preserveOutput: takeFirst(userConfig.preserveOutput, 'always'),
